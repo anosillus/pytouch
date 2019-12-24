@@ -3,18 +3,28 @@ LABEL iida kenji "k.iida@churadata.okinawa"
 
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -yq --no-install-recommends \
     curl \
     ca-certificates \
     sudo \
     git \
     bzip2 \
     libx11-6 \
- && rm -rf /var/lib/apt/lists/*
-
-# Create a working directory
-RUN mkdir /app
-WORKDIR /app
+    build-essential \
+    fish \
+    fonts-ipaexfont \
+    fonts-noto-cjk \
+    git \
+    inkscape \
+    libgl1-mesa-dev \
+    pandoc \
+    texlive-fonts-extra \
+    texlive-fonts-recommended \
+    texlive-generic-recommended \
+    texlive-latex-base \
+    texlive-latex-extra \
+    unzip \
+&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
@@ -56,23 +66,6 @@ echo "c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'director
 
 SHELL ["/bin/bash", "-c"]
 RUN conda config --system --prepend channels conda-forge
-
-RUN apt-get update && apt-get install -yq --no-install-recommends \
-    build-essential \
-    fish \
-    fonts-ipaexfont \
-    fonts-noto-cjk \
-    git \
-    inkscape \
-    libgl1-mesa-dev \
-    pandoc \
-    texlive-fonts-extra \
-    texlive-fonts-recommended \
-    texlive-generic-recommended \
-    texlive-latex-base \
-    texlive-latex-extra \
-    unzip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY environment.yaml /tmp
 RUN conda install tini && \
