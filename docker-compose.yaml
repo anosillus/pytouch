@@ -2,12 +2,12 @@ version: "3"
 services:
   pytouch:
     build:
-     context: ./envs
+     context: ./env
      dockerfile: Dockerfile
     image: pytouch:1.0
     container_name: pytouch
     volumes:
-      - ".:/home/pytouch"
+      - ".:/home/user"
     ports:
       - "8888:8888"
     privileged: true
