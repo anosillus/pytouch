@@ -54,10 +54,8 @@ echo "c.NotebookApp.notebook_dir = '/home/user'"; \
 echo "c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']"; \
 } | tee ~/.jupyter/jupyter_notebook_config.py
 
-ENV CONDA_DIR=/opt/conda
-
 SHELL ["/bin/bash", "-c"]
-RUN $CONDA_DIR/bin/conda config --system --prepend channels conda-forge
+RUN conda config --system --prepend channels conda-forge
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     build-essential \
@@ -77,8 +75,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY environment.yaml /tmp
-RUN $CONDA_DIR/bin/conda install tini && \
-    $CONDA_DIR/bin/conda env update -f /tmp/environment.yaml && \
+RUN conda install tini && \
+    conda env update -f /tmp/environment.yaml && \
     rm /tmp/environment.yaml && \
     conda clean --all -f -y
 
