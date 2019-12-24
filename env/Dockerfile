@@ -43,14 +43,14 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN /home/user/miniconda/bin/conda install conda-build \
  && /home/user/miniconda/bin/conda clean -ya
 
-RUN mkdir -p /home/pytouch && \
+RUN mkdir -p /home/user && \
 mkdir -p ~/.jupyter && { \
 echo "c.NotebookApp.allow_root = True"; \
 echo "c.NotebookApp.ip = '0.0.0.0'"; \
 echo "c.NotebookApp.token = ''"; \
 echo "c.NotebookApp.open_browser = False"; \
 echo "c.JupyterLabTemplates.include_default = True"; \
-echo "c.NotebookApp.notebook_dir = '/home/pytouch'"; \
+echo "c.NotebookApp.notebook_dir = '/home/user'"; \
 echo "c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']"; \
 } | tee ~/.jupyter/jupyter_notebook_config.py
 
