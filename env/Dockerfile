@@ -34,21 +34,14 @@ RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.5.1
 ENV PATH=/home/user/miniconda/bin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
-# Create a Python 3.6 environment
-RUN /home/user/miniconda/bin/conda create -y --name py36 python=3.6.9 \
+# Create a Python 3.7 environment
+RUN /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
  && /home/user/miniconda/bin/conda clean -ya
-ENV CONDA_DEFAULT_ENV=py36
+ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
-RUN /home/user/miniconda/bin/conda install conda-build=3.18.9=py36_3 \
+RUN /home/user/miniconda/bin/conda install conda-build \
  && /home/user/miniconda/bin/conda clean -ya
-
-RUN TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
-    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
-    dpkg -i tini.deb && \
-    rm tini.deb && \
-    rm -rf /var/lib/apt/lists/*
-# "
 
 RUN mkdir -p /home/pytouch && \
 mkdir -p ~/.jupyter && { \
@@ -84,7 +77,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY environment.yaml /tmp
-RUN $CONDA_DIR/bin/conda env update -f /tmp/environment.yaml && \
+RUN $CONDA_DIR/bin/conda install tini && \
+    $CONDA_DIR/bin/conda env update -f /tmp/environment.yaml && \
     rm /tmp/environment.yaml && \
     conda clean --all -f -y
 
