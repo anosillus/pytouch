@@ -7,12 +7,10 @@ dependencies:
   - autopep8
   - black
   - bokeh
-  - category_encoders
   - cudatoolkit=10.0.*
   - cudnn
   - flake8
   - flake8-import-order
-  - graphviz
   - ipykernel
   - ipython-sql
   - ipywidgets
@@ -21,16 +19,16 @@ dependencies:
   - jupytext
   - nbdime 
   - nodejs=9.*
-  - numba
   - opencv=4.*
   - pathlib2
   - pep8
-  - pillow
   - pydotplus
   - python-graphviz
   - typing
   - yapf
+  - gcc
   - pip:
+    - category_encoders
     - black
     - cupy-cuda100
     - japanize_matplotlib
