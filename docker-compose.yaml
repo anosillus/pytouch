@@ -2,9 +2,9 @@ version: "3"
 services:
   pytouch:
     build:
-     context: ./env
-     dockerfile: Dockerfile
-    image: pytouch:1.0
+      context: ./env
+      dockerfile: Dockerfile
+    image: pytouch:1.1
     container_name: pytouch
     volumes:
       - ".:/home/user"
@@ -12,4 +12,4 @@ services:
       - "8888:8888"
     privileged: true
     restart: unless-stopped
-    command: jupyter lab 
+    command: jupyter lab

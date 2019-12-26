@@ -1,48 +1,30 @@
 name: python37
 channels:
+  - anaconda
   - conda-forge
   - defaults
 dependencies:
   - python=3.7.*
-  - autopep8
-  - black
-  - bokeh
+  # - autopep8
+  # - black
+  # - bokeh
   - cudatoolkit=10.0.*
   - cudnn
-  - flake8
-  - flake8-import-order
   - ipykernel
-  - ipython-sql
   - ipywidgets
-  - isort
+  # - isort
   - jupyterlab
-  - jupytext
-  - nbdime 
-  - nodejs=9.*
-  - opencv=4.*
-  - pathlib2
-  - pep8
-  - pydotplus
-  - python-graphviz
-  - typing
-  - yapf
+  # - jupytext
+  # - nbdime
+  # - nodejs=9.*
+  # - opencv=4.*
+  # - pathlib2
+  # - pydotplus
+  # - python-graphviz
+  # - typing
   - gcc
+  - pytorch
   - pip:
-    - category_encoders
-    - black
-    - cupy-cuda100
-    - japanize_matplotlib
-    - kaggle-cli
-    - matplotlib
-    - numpy
-    - optuna
-    - pandas
-    - plotly
-    - pytorch-lightning
-    - scikit-image
-    - scikit-learn
-    - scipy
-    - seaborn
-    - sklearn
+      - pytorch-lightning
 
 prefix: /opt/conda/envs/python37
